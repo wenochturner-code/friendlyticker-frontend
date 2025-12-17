@@ -4,7 +4,10 @@
 import * as components from "./components.js";
 
 // ====== Config ======
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1"
+    ? "http://127.0.0.1:8000"
+    : "https://friendlyticker-api.onrender.com";
 const ALERT_EMAIL_KEY = "ft_alert_email";
 
 // Phase 2 Alerts UI prefs (frontend-only persistence)
@@ -1178,3 +1181,4 @@ function ensurePrefsForTicker(ticker) {
     }, 1200);
   });
 })();
+
