@@ -1759,3 +1759,83 @@ body {
 .alert-threshold-input__field:disabled {
   opacity: 0.65;
 }
+/* =========================================================
+   iPhone / Mobile Safari HARD FIXES
+   Drop-in block — safe to append at bottom
+   ========================================================= */
+
+/* 1) Fix iOS viewport + address bar jump */
+.app {
+  min-height: 100dvh;
+}
+@supports not (min-height: 100dvh) {
+  .app { min-height: 100vh; }
+}
+
+/* 2) Prevent horizontal scroll on iPhone */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* 3) iOS input zoom fix */
+.analyze-form__input,
+.alert-threshold-input__field,
+#pro-waitlist-email {
+  font-size: 16px;
+}
+
+/* 4) Flex overflow fix (critical on iOS Safari) */
+.main,
+.view,
+.card,
+.result-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* 5) Analyze form wraps cleanly on small screens */
+.analyze-form__row {
+  flex-wrap: wrap;
+}
+
+.analyze-form__input {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.analyze-form__button {
+  flex: 0 0 auto;
+}
+
+/* 6) Sidebar + layout collapse on phones */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  #sidebar {
+    position: static;
+    width: 100%;
+    flex: none;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .main {
+    width: 100%;
+  }
+}
+
+/* 7) Safe-area padding for iPhone home indicator */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.footer {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
