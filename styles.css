@@ -1838,37 +1838,47 @@ body {
 .footer {
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
-/* ===== MOBILE NAVBAR VISIBILITY FIX (DESKTOP UNCHANGED) ===== */
+/* ===== HARD MOBILE NAVBAR RESTORE ===== */
 @media (max-width: 860px) {
 
-  /* Ensure navbar is not hidden on mobile */
+  /* Force any header/nav back into layout */
+  header,
+  nav,
   .navbar,
-  #navbar,
-  header {
+  #navbar {
     display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+
+    width: 100% !important;
+    height: auto;
+
+    z-index: 9999 !important;
+
     visibility: visible !important;
     opacity: 1 !important;
   }
 
-  /* If using CSS grid, explicitly place navbar */
-  .app {
-    grid-template-columns: 1fr !important;
-    grid-template-areas:
-      "navbar"
-      "content"
-      "footer" !important;
+  /* Push content down so navbar isn't covering it */
+  main,
+  .content,
+  #content {
+    padding-top: 64px !important;
   }
 
-  .navbar,
-  #navbar {
-    grid-area: navbar;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  /* Sidebar should stay hidden on mobile */
+  /* Sidebar stays gone on mobile */
   #sidebar {
     display: none !important;
+  }
+
+  /* Prevent mobile grid from eating the navbar */
+  .app {
+    display: block !important;
+  }
+
+  html, body {
+    overflow-x: hidden;
   }
 }
