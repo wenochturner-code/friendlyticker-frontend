@@ -1838,39 +1838,63 @@ body {
 .footer {
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
-/* ===== MOBILE NAVBAR FIX (DESKTOP UNCHANGED) ===== */
+/* ===== MOBILE: keep sidebar, but make it a compact top nav strip ===== */
 @media (max-width: 860px) {
 
-  /* 1) remove sidebar from mobile layout */
+  /* Keep your layout stacking, but make the sidebar compact */
   #sidebar {
-    display: none !important;
-  }
-
-  /* 2) make mobile layout a simple vertical stack */
-  .app {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 14px !important;
-    padding: 16px !important;
-  }
-
-  /* 3) force navbar to show and stay on top */
-  .navbar {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-
     position: sticky !important;
     top: 8px !important;
-    z-index: 9999 !important;
+    z-index: 50 !important;
 
-    margin-bottom: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+
+    /* stop it from feeling like a giant “section” */
+    padding: 0 !important;
+    margin: 0 0 12px 0 !important;
   }
 
-  /* keep content full width */
-  #content {
-    max-width: 100% !important;
+  /* The actual sidebar card: reduce padding so it’s not a big block */
+  .sidebar {
     width: 100% !important;
+    padding: 10px 10px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Optional: make brand area slimmer */
+  .sidebar__brand {
+    padding: 6px 8px 8px !important;
+  }
+
+  /* The key: turn vertical nav into a horizontal scroll row */
+  .sidebar__nav {
+    flex-direction: row !important;
+    gap: 8px !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+
+    /* keep it one line */
+    flex-wrap: nowrap !important;
+
+    padding: 6px 4px 2px !important;
+  }
+
+  /* Make each nav item “pill-like” and prevent wrapping */
+  .sidebar__link {
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+    padding: 10px 12px !important;
+    border-radius: 999px !important;
+  }
+
+  /* Optional: move CTA out of the way on mobile (still accessible if you keep it)
+     If you want it visible, DELETE this block. */
+  .sidebar__upgrade {
+    margin-top: 8px !important;
   }
 }
+
 
