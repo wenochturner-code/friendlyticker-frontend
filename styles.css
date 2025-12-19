@@ -1838,3 +1838,39 @@ body {
 .footer {
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
+/* ===== MOBILE NAVBAR FIX (DESKTOP UNCHANGED) ===== */
+@media (max-width: 860px) {
+
+  /* 1) remove sidebar from mobile layout */
+  #sidebar {
+    display: none !important;
+  }
+
+  /* 2) make mobile layout a simple vertical stack */
+  .app {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 16px !important;
+  }
+
+  /* 3) force navbar to show and stay on top */
+  .navbar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    position: sticky !important;
+    top: 8px !important;
+    z-index: 9999 !important;
+
+    margin-bottom: 0 !important;
+  }
+
+  /* keep content full width */
+  #content {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
