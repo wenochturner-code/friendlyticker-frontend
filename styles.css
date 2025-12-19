@@ -1838,43 +1838,37 @@ body {
 .footer {
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
-/* ===== MOBILE NAVBAR + LAYOUT FIX (DESKTOP UNCHANGED) ===== */
+/* ===== MOBILE NAVBAR VISIBILITY FIX (DESKTOP UNCHANGED) ===== */
 @media (max-width: 860px) {
 
-  /* Redefine grid ONLY on mobile */
+  /* Ensure navbar is not hidden on mobile */
+  .navbar,
+  #navbar,
+  header {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* If using CSS grid, explicitly place navbar */
   .app {
     grid-template-columns: 1fr !important;
-    grid-template-rows: auto auto 1fr auto !important;
     grid-template-areas:
       "navbar"
-      "message"
       "content"
       "footer" !important;
-
-    padding: 16px !important;
   }
 
-  /* Explicitly place navbar back on screen */
-  .navbar {
+  .navbar,
+  #navbar {
     grid-area: navbar;
     position: sticky;
-    top: 8px;
-    z-index: 50;
+    top: 0;
+    z-index: 100;
   }
 
-  /* Sidebar should not exist in layout on mobile */
+  /* Sidebar should stay hidden on mobile */
   #sidebar {
     display: none !important;
-  }
-
-  /* Content should go full width */
-  #content {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-
-  /* Prevent iOS horizontal scroll bugs */
-  html, body {
-    overflow-x: hidden;
   }
 }
