@@ -1838,4 +1838,49 @@ body {
 .footer {
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
+/* ===== MOBILE-ONLY FIX (does not change desktop) =====
+   Paste this at the VERY BOTTOM of your CSS
+   It overrides the mobile rules that currently make the sidebar stack as a huge block.
+*/
+@media (max-width: 860px) {
+
+  /* keep your desktop grid/flex untouched; only override mobile */
+  .app {
+    grid-template-columns: 1fr !important;  /* single column on phone */
+    grid-template-rows: auto auto 1fr auto !important;
+    grid-template-areas:
+      "message"
+      "content"
+      "content"
+      "footer" !important;
+
+    /* keep spacing sane on iPhone */
+    padding: 16px !important;
+  }
+
+  /* completely remove sidebar from the flow on phones */
+  #sidebar {
+    display: none !important;
+  }
+
+  /* content should be full width and not capped */
+  #content {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* prevent iPhone horizontal scroll/jumble */
+  html, body {
+    overflow-x: hidden;
+  }
+  .main, .view, .card, .result-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* analyze row wraps cleanly */
+  .analyze-form__row { flex-wrap: wrap; }
+  .analyze-form__input { flex: 1 1 180px; min-width: 0; }
+}
+
 
